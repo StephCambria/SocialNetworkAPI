@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 //const assignmentSchema = require('./Assignment');
 
-// Schema to create Student model
+// Schema to create Thought model
 const thoughtSchema = new Schema(
   {
     thoughtText: {
@@ -14,6 +14,7 @@ const thoughtSchema = new Schema(
       type: Date,
       default: Date.now,
       //  Use a getter method to format the timestamp on query
+      // get: 
     },
     username: {
       type: String,
@@ -21,6 +22,7 @@ const thoughtSchema = new Schema(
     },
     reactions: {
       // Array of nested documents created with the reactionSchema
+      // [ReactionSchema]
     },
     // Schema Settings:
     // Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.

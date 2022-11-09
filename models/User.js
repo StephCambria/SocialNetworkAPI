@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-//const assignmentSchema = require('./Assignment');
 
 // Schema to create Student model
 const userSchema = new Schema(
@@ -9,28 +8,35 @@ const userSchema = new Schema(
       required: true,
       unique: true,
       trimmed: true,
-      //max_length: 50,
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      //max_length: 50,
-      // Must match a valid email address (look into Mongoose's matching validation)
+      // Must match a valid email address
+      // You can use a regex: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
+      // Or you can write a seperate function?
+      validate: {
+        validator: function (v) {
+          return 
+        },
+        // message: "Not a valid email address."
+      }
     },
     thoughts: {
-      type: String,
-      // Array of _id values referencing the Thought model
+      type: Schema.Types.ObjectId, // Array of _id values referencing the Thought model
+      ref: "Thought",
     },
-    friends: {
-      type: String,
-      // Array of _id values referencing the User model (self-reference)
-    },
-    //assignments: [assignmentSchema],
+    friends: [
+      {
+        type: Schema.Types.ObjectId, // Array of _id values referencing the User model (self-reference)
+        ref: "User",
+      },
+    ],
   },
   {
     toJSON: {
-      getters: true,
+      virtuals: true,
     },
   }
 );
