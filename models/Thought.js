@@ -38,19 +38,23 @@ const thoughtSchema = new Schema(
       type: String,
       required: true,
     },
-    reactions: {
+    reactions:
       // Array of nested documents created with the reactionSchema
-      // [ReactionSchema]
-    },
-    // Schema Settings:
-    // Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
+      [reactionSchema],
   },
   {
     toJSON: {
       getters: true,
+      virtuals: true,
     },
   }
 );
+
+// Schema Settings:
+// Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
+thoughtSchema.virtual("reactionCount").get(function () {
+  return this.reactions.length;
+});
 
 const Thought = model("thoughts", userSchema);
 

@@ -18,10 +18,10 @@ const userSchema = new Schema(
       // Or you can write a seperate function?
       validate: {
         validator: function (v) {
-          return 
+          return;
         },
         // message: "Not a valid email address."
-      }
+      },
     },
     thoughts: {
       type: Schema.Types.ObjectId, // Array of _id values referencing the Thought model
@@ -40,6 +40,12 @@ const userSchema = new Schema(
     },
   }
 );
+
+// Schema Settings:
+// Create a virtual called friendCount that retrieves the length of the user's friends array field on query.
+userSchema.virtual("friendCount").get(function () {
+  return this.friends.length;
+});
 
 const User = model("user", userSchema);
 
