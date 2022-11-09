@@ -1,6 +1,24 @@
 const { Schema, model } = require("mongoose");
 //const assignmentSchema = require('./Assignment');
 
+// Schema to create Reaction model
+const reactionSchema = new Schema({
+  reactionId: {},
+  reactionBody: {},
+  username: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    //  Use a getter method to format the timestamp on query
+    // get:
+  },
+});
+
+// =======================================
+
 // Schema to create Thought model
 const thoughtSchema = new Schema(
   {
@@ -14,7 +32,7 @@ const thoughtSchema = new Schema(
       type: Date,
       default: Date.now,
       //  Use a getter method to format the timestamp on query
-      // get: 
+      // get:
     },
     username: {
       type: String,
