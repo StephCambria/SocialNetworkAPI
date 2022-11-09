@@ -1,6 +1,3 @@
-const {
-  getRandomName,
-} = require("../../../28-Stu_Mini-Project/Develop/utils/data");
 const connection = require("../config/connection");
 const { User, Thought } = require("../models");
 // const {} = require("./data"); // import data functions here
