@@ -2,12 +2,16 @@ const { Thought, User } = require("../models");
 
 module.exports = {
   // =======================================
+  // =======================================
+  // =======================================
   // Get all thoughts
   getThoughts(req, res) {
     Thought.find()
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
+  // =======================================
+  // =======================================
   // =======================================
   // Get a thought
   getSingleThought(req, res) {
@@ -21,6 +25,8 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   // =======================================
+  // =======================================
+  // =======================================
   // Create a thought
   createThought(req, res) {
     Thought.create(req.body)
@@ -30,6 +36,8 @@ module.exports = {
         return res.status(500).json(err);
       });
   },
+  // =======================================
+  // =======================================
   // =======================================
   // Delete a thought
   deleteThought(req, res) {
@@ -42,6 +50,8 @@ module.exports = {
       .then(() => res.json({ message: "Thought and user deleted!" }))
       .catch((err) => res.status(500).json(err));
   },
+  // =======================================
+  // =======================================
   // =======================================
   // Update a thought
   updateThought(req, res) {
@@ -58,6 +68,8 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   // =======================================
+  // =======================================
+  // =======================================
   // Add a reaction
   addReaction(req, res) {
     Thought.findOneAndUpdate(
@@ -71,6 +83,8 @@ module.exports = {
         return res.status(500).json(err);
       });
   },
+  // =======================================
+  // =======================================
   // =======================================
   // Delete a reaction
   removeReaction(req, res) {
