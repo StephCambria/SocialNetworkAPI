@@ -1,4 +1,21 @@
+const { ObjectId } = require("mongoose").Types;
 const { User, Thought } = require("../models");
+
+const thought = async (userId) =>
+  User.aggregate([
+    {
+      $match: { _id: ObjectId(userId) },
+    },
+    {
+      $unwind: "$thoughts",
+    },
+    {
+      $group: {
+        _id: ObjectId(userId),
+        thoughts: { $avg: "$thoughts.length" },
+      },
+    },
+  ]);
 
 module.exports = {
   // =======================================
@@ -23,6 +40,7 @@ module.exports = {
           ? res.status(404).json({ message: "No user with that ID" })
           : res.json({
               user,
+              thoughts: await thought(req.params.userId),
             })
       )
       .catch((err) => {
@@ -59,25 +77,16 @@ module.exports = {
   // =======================================
   // =======================================
   // =======================================
-  // Delete thoughts when deleting a user
+  // Delete user
   deleteUser(req, res) {
-    User.findOneAndDelete({ _id: req.params.userId }).then((user) =>
-      user.thoughts
-        .forEach((thought) => {
-          thought.findOneAndDelete({ _id: user }); // I'm assuming we specify the userId for this
-        })
-        .then((user) => {
-          !user
-            ? res.status(404).json({
-                message: "No user found with that ID",
-              })
-            : res.json({ message: "User and thoughts deleted" });
-        })
-        .catch((err) => {
-          console.log(err);
-          res.status(500).json(err);
-        })
-    );
+    User.findOneAndDelete({ _id: req.params.userId })
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No user found with that ID" })
+          : Thought.deleteMany({ _id: { $in: user.thoughts } })
+      )
+      .then(() => res.json({ message: "User deleted" }))
+      .catch((err) => res.status(500).json(err));
   },
   // =======================================
   // =======================================
@@ -86,7 +95,7 @@ module.exports = {
   addFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $push: { friends: req.params.friendId } },
+      { $addToSet: { friends: req.params.friendId } },
       { new: true }
     )
       .then((user) =>
