@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongoose").Types;
 const { Schema, model } = require("mongoose");
 
 // Schema to create Student model
@@ -15,12 +16,12 @@ const userSchema = new Schema(
       unique: true,
       // Must match a valid email address
       // You can use a regex: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
-      // Or you can write a seperate function?
+      // https://mongoosejs.com/docs/validation.html#async-custom-validators
       validate: {
         validator: function (v) {
-          return;
+          return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(v);
         },
-        // message: "Not a valid email address."
+        message: (props) => `${props.value} is not a valid email address.`,
       },
     },
     thoughts: {

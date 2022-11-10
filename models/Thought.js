@@ -1,10 +1,17 @@
-const { Schema, model } = require("mongoose");
-//const assignmentSchema = require('./Assignment');
+const { Schema, model, Types } = require("mongoose");
+const moment = require("moment");
 
 // Schema to create Reaction model
 const reactionSchema = new Schema({
-  reactionId: {},
-  reactionBody: {},
+  reactionId: {
+    type: Schema.Types.ObjectId,
+    default: () => new Types.ObjectId(),
+  },
+  reactionBody: {
+    type: String,
+    required: true,
+    max_length: 280,
+  },
   username: {
     type: String,
     required: true,
@@ -13,7 +20,11 @@ const reactionSchema = new Schema({
     type: Date,
     default: Date.now,
     //  Use a getter method to format the timestamp on query
-    // get:
+    // https://mongoosejs.com/docs/tutorials/getters-setters.html
+    // https://mongoosejs.com/docs/timestamps.html
+    // https://mongoosejs.com/docs/tutorials/dates.html
+    // For simplicity I'm just using moment
+    get: createdAtValue => moment(createdAtValue).format("MMM Do YYYY [at] h:mm a"),
   },
 });
 
@@ -32,7 +43,7 @@ const thoughtSchema = new Schema(
       type: Date,
       default: Date.now,
       //  Use a getter method to format the timestamp on query
-      // get:
+      get: createdAtValue => moment(createdAtValue).format("MMM Do YYYY [at] h:mm a"),
     },
     username: {
       type: String,
@@ -56,6 +67,6 @@ thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
 
-const Thought = model("thoughts", userSchema);
+const Thought = model("thoughts", thoughtSchema);
 
 module.exports = Thought;
