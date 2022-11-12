@@ -24,10 +24,12 @@ const userSchema = new Schema(
         message: (props) => `${props.value} is not a valid email address.`,
       },
     },
-    thoughts: {
+    thoughts: [
+      {
       type: Schema.Types.ObjectId, // Array of _id values referencing the Thought model
       ref: "Thought",
     },
+  ],
     friends: [
       {
         type: Schema.Types.ObjectId, // Array of _id values referencing the User model (self-reference)
