@@ -26,10 +26,10 @@ const userSchema = new Schema(
     },
     thoughts: [
       {
-      type: Schema.Types.ObjectId, // Array of _id values referencing the Thought model
-      ref: "Thought",
-    },
-  ],
+        type: Schema.Types.ObjectId, // This returns empty on GET users, but works fine when getting thoughts
+        ref: "Thought",
+      },
+    ],
     friends: [
       {
         type: Schema.Types.ObjectId, // Array of _id values referencing the User model (self-reference)
@@ -41,6 +41,7 @@ const userSchema = new Schema(
     toJSON: {
       virtuals: true,
     },
+    id: false,
   }
 );
 
