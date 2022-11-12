@@ -1,37 +1,25 @@
 const { ObjectId } = require("mongoose").Types;
 const { User, Thought } = require("../models");
 
-const thought = async (userId) =>
-  User.aggregate([
-    {
-      $match: { _id: ObjectId(userId) },
-    },
-    {
-      $unwind: "$thoughts",
-    },
-    {
-      $group: {
-        _id: ObjectId(userId),
-        thoughts: { $avg: "$thoughts.length" },
-      },
-    },
-  ]);
-
 module.exports = {
   // =======================================
   // =======================================
-  // =======================================
   // Get all users
+  // =======================================
+  // =======================================
   getUsers(req, res) {
+    // find({}) will return all users in the database
     User.find({})
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
   // =======================================
   // =======================================
+  // Get one user
   // =======================================
-  // Get a single user
+  // =======================================
   getSingleUser(req, res) {
+    // Find the user ID and return all data associated with it
     User.findOne({ _id: req.params.userId })
       .select("-__v")
       .lean()
@@ -40,7 +28,6 @@ module.exports = {
           ? res.status(404).json({ message: "No user with that ID" })
           : res.json({
               user,
-              thoughts: await thought(req.params.userId),
             })
       )
       .catch((err) => {
@@ -50,20 +37,25 @@ module.exports = {
   },
   // =======================================
   // =======================================
+  // Create a user
   // =======================================
-  // create a new user
+  // =======================================
   createUser(req, res) {
+    // No ID needed, just add a user to the database
     User.create(req.body)
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
   // =======================================
   // =======================================
-  // =======================================
   // Update a user
+  // =======================================
+  // =======================================
   updateUser(req, res) {
+    // Find the user ID
     User.findOneAndUpdate(
       { _id: req.params.userId },
+      // Update the user directly
       { $set: req.body },
       { runValidators: true, new: true }
     )
@@ -76,30 +68,31 @@ module.exports = {
   },
   // =======================================
   // =======================================
+  // Delete a user
   // =======================================
-  // Delete user
+  // =======================================
   deleteUser(req, res) {
+    // Find the user ID
     User.findOneAndDelete({ _id: req.params.userId })
-      .then((user) =>
-        !user
-          ? res.status(404).json({ message: "No user found with that ID" })
-          : Thought.deleteMany({ _id: { $in: user.thoughts } })
+      .then(
+        (user) =>
+          !user
+            ? res.status(404).json({ message: "No user found with that ID" })
+            : Thought.deleteMany({ _id: { $in: user.thoughts } }) // Can't get this part to work yet
       )
       .then(() => res.json({ message: "User deleted" }))
       .catch((err) => res.status(500).json(err));
   },
   // =======================================
   // =======================================
-  // =======================================
-
-  
-  // TODO:
-
-
   // Add a friend to a user
+  // =======================================
+  // =======================================
   addFriend(req, res) {
+    // Look for the user ID
     User.findOneAndUpdate(
       { _id: req.params.userId },
+      // Add the friend to that user
       { $addToSet: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
@@ -112,19 +105,26 @@ module.exports = {
   },
   // =======================================
   // =======================================
+  // Remove a friend from a user
   // =======================================
-  // Remove friend
+  // =======================================
   removeFriend(req, res) {
+    // Look for the user ID
     User.findOneAndUpdate(
       { _id: req.params.userId },
+      // Remove the friend based on the selected ID
+      // The friends array returns each friend's user ID instead of an entirely new ID
       { $pull: { friends: req.params.friendId } },
-      { new: true }
+      { runValidators: true, new: true }
     )
-      .then((user) =>
-        !user
-          ? res.status(404).json({ message: "No user found with that ID" })
-          : res.json(user)
-      )
+      .then((user) => {
+        if (!user) {
+          return res
+            .status(404)
+            .json({ message: "No user found with that ID" });
+        }
+        res.json(user);
+      })
       .catch((err) => res.status(500).json(err));
   },
 };
