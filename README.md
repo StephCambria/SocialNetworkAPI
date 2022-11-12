@@ -2,6 +2,8 @@
 ![License Badge](https://shields.io/badge/license-ISC-green)
 
 
+## Video Demo
+pending
 
 ## Table of Contents
 1. [Description](#description)
@@ -18,6 +20,10 @@
 
 ## Installation
 
+[Mongoose](https://www.npmjs.com/package/mongoose)
+[Express](https://www.npmjs.com/package/express)
+[Moment](https://www.npmjs.com/package/moment)
+
 
 ## Usage
 
@@ -26,7 +32,7 @@
 ## Contributing
 You can contribute to this project by submitting bugs via [ISSUES](https://github.com/StephCambria/SocialNetworkAPI/issues).
 ## Tests
-All testing was done locally through Insomnia.
+All testing was done locally through [Insomnia](https://insomnia.rest/).
 
 
 ## License
