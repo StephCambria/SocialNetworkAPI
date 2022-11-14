@@ -3,7 +3,7 @@
 
 
 ## Video Demo
-pending
+[DEMO](https://watch.screencastify.com/v/8RxjCLKIki2kBfa2OImA)
 
 ## Table of Contents
 1. [Description](#description)
@@ -44,6 +44,49 @@ From there, you will be able to use this application in [Insomnia](https://insom
 
 
 ## Usage
+Users will be able to use this API through [Insomnia](https://insomnia.rest/). While the server is running, users will be able to...
+
+Get all users ```/api/users```:
+
+<img width="1591" alt="get-users" src="https://user-images.githubusercontent.com/107421370/201748108-da98a6d2-d560-4d3e-8da5-c3dd6bdcce22.png">
+
+Get a user by their ID ```/api/users/:userId```:
+
+<img width="1591" alt="user-id" src="https://user-images.githubusercontent.com/107421370/201748274-5f622759-eb31-4e5d-bd02-12b5e82cf11d.png">
+
+Update a user ```/api/users/:userId```:
+
+<img width="1591" alt="update-user" src="https://user-images.githubusercontent.com/107421370/201748396-7f4f6816-761e-47af-99fe-3f0113e30a45.png">
+
+Create a user ```/api/users```:
+
+<img width="1593" alt="create-user" src="https://user-images.githubusercontent.com/107421370/201749331-f1ed4c20-eb09-4c5b-b517-6b94a513913e.png">
+
+Add a friend ```/api/users/:userId/friends/:friendId```:
+
+<img width="1589" alt="add-friend" src="https://user-images.githubusercontent.com/107421370/201748534-a22ec5ef-1bb4-4502-9350-23d5a5e9dcea.png">
+
+Get all thoughts ```/api/thoughts```:
+
+<img width="1590" alt="get-thoughts" src="https://user-images.githubusercontent.com/107421370/201748877-4b92f83d-7f94-4b1e-9e94-8839e9f5311c.png">
+
+Get a thought by ID ```/api/thoughts/:thoughtId```:
+
+<img width="1589" alt="thought-id" src="https://user-images.githubusercontent.com/107421370/201749027-1a861c56-5ff9-42f0-a8f2-e208b66b6ecc.png">
+
+Update a thought ```/api/thoughts/:thoughtId```:
+
+<img width="1593" alt="update-thought" src="https://user-images.githubusercontent.com/107421370/201749132-2e612784-3fca-416f-9a74-0f6c2662657a.png">
+
+Create a thought ```/api/thoughts/```:
+
+<img width="1589" alt="create-thought" src="https://user-images.githubusercontent.com/107421370/201749484-ec37f35e-a501-461d-b8e5-eb469adcdec0.png">
+
+Add a reaction ```/api/thoughts/:thoughtId/reactions```:
+
+<img width="1590" alt="add-reaction" src="https://user-images.githubusercontent.com/107421370/201749638-ba4008a4-7c37-4766-80d1-c6441138169a.png">
+
+As well as delete reactions by their reaction ID ```/api/thoughts/:thoughtId/reactions/:reactionId```, friends by their user ID, thoughts by their ID, and users by their ID.
 
 
 
