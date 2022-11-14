@@ -21,11 +21,16 @@ This is a simple app that serves as the back-end API for a social network site. 
 ## Installation
 To install, clone this repository to your local machine:
 
+<img width="415" alt="Screen Shot 2022-11-14 at 1 40 30 PM" src="https://user-images.githubusercontent.com/107421370/201740096-801c7791-7023-40ba-a747-5140c321a582.png">
+
+
 And install the following dependencies:
 
 * [Mongoose](https://www.npmjs.com/package/mongoose)
 * [Express](https://www.npmjs.com/package/express)
 * [Moment](https://www.npmjs.com/package/moment)
+
+
 
 (These dependencies will be in ```the package.json``` file)
 
