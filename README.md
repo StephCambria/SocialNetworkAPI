@@ -23,6 +23,8 @@ To install, clone this repository to your local machine:
 
 <img width="415" alt="Screen Shot 2022-11-14 at 1 40 30 PM" src="https://user-images.githubusercontent.com/107421370/201740096-801c7791-7023-40ba-a747-5140c321a582.png">
 
+<img width="872" alt="Screen Shot 2022-11-14 at 1 42 07 PM" src="https://user-images.githubusercontent.com/107421370/201740473-90032369-61f7-4068-bc33-59492bf2738c.png">
+
 
 And install the following dependencies:
 
@@ -30,11 +32,13 @@ And install the following dependencies:
 * [Express](https://www.npmjs.com/package/express)
 * [Moment](https://www.npmjs.com/package/moment)
 
-
+<img width="540" alt="Screen Shot 2022-11-14 at 1 42 49 PM" src="https://user-images.githubusercontent.com/107421370/201740507-e6a2f08b-ec3d-438e-9862-24822ab47dd5.png">
 
 (These dependencies will be in ```the package.json``` file)
 
 Once the necessary dependencies are installed, start the server by going to the terminal and entering the command ```node server.js```:
+
+<img width="648" alt="Screen Shot 2022-11-14 at 1 44 21 PM" src="https://user-images.githubusercontent.com/107421370/201740704-53fe0a10-88d8-45d8-b171-18c693c4f485.png">
 
 From there, you will be able to use this application in [Insomnia](https://insomnia.rest/)!
 
