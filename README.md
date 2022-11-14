@@ -15,14 +15,23 @@ pending
 7. [Questions](#questions)
 
 ## Description
-
+This is a simple app that serves as the back-end API for a social network site. Built from scratch, it makes use of [Express](https://www.npmjs.com/package/express) for all of the routing, [MongoDB](https://www.mongodb.com/) for its database, the [Mongoose](https://www.npmjs.com/package/mongoose) ODM to connect the database to the Express server, and [Moment](https://www.npmjs.com/package/moment) to format dates and timestamps. Users will be able to use this API through [Insomnia](https://insomnia.rest/) to post and update their thoughts, view and react to others' thoughts, add and delete friends, as well as add and delete thoughts and users.
 
 
 ## Installation
+To install, clone this repository to your local machine:
 
-[Mongoose](https://www.npmjs.com/package/mongoose)
-[Express](https://www.npmjs.com/package/express)
-[Moment](https://www.npmjs.com/package/moment)
+And install the following dependencies:
+
+* [Mongoose](https://www.npmjs.com/package/mongoose)
+* [Express](https://www.npmjs.com/package/express)
+* [Moment](https://www.npmjs.com/package/moment)
+
+(These dependencies will be in ```the package.json``` file)
+
+Once the necessary dependencies are installed, start the server by going to the terminal and entering the command ```node server.js```:
+
+From there, you will be able to use this application in [Insomnia](https://insomnia.rest/)!
 
 
 ## Usage
